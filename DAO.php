@@ -81,6 +81,6 @@ abstract class DAO
     // Cierra la conexión a MySQL
     public function close()
     {
-        $this->c = null;
+        $this->con = null;
     }
 }
