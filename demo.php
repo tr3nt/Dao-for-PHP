@@ -8,18 +8,15 @@ class UserDao extends DAO
 {
     public function get_user($id)
     {
-        $this->query = $this->con->prepare("SELECT * FROM users WHERE id = '{$id}'");
-        // void equals 'false' to return user data from query
-        // void igual a 'false' indica que devuelva los datos de user
-        $this->execute(false);
+        // if void equals 'false', it will return data from query
+        // si void es igual a 'false', devolverá los datos del query
+        $this->executeQuery("SELECT * FROM users WHERE id = '{$id}'", false);
     }
     public function save_user($name)
     {
-        $this->query = $this->con->prepare("INSERT INTO users (name) VALUES ('{$name}')");
-        $this->execute();
-        // Set custom message to display if not errors, on result['data']
-        // Crear mensaje personalizado que se mostrará si no hay errores, en result['data']
-        $this->set_msj('User saved successfully!');
+        // Set void to true and set custom success message to save data
+        // Cambiar void a true y crear un mensaje de éxito para guardar datos
+        $this->executeQuery("INSERT INTO users (name) VALUES ('{$name}')", true, 'User saved successfully!');        
     }
 }
 
