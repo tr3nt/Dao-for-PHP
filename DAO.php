@@ -68,6 +68,15 @@ abstract class DAO
         }
     }
 
+    // Combine methods in one
+    // Combina metodos en uno solo
+    protected function executeQuery($query, $void = true, $message = false)
+    {
+        $this->query = $this->con->prepare($query);
+        $this->execute($void);
+        if (!$void && $message) { $this->set_msj($message); }
+    }
+
     // Returns custom message as long as there is no error
     // Devuelve un mensaje personalizado siempre y cuando no haya error
     protected function set_msj($msj)
