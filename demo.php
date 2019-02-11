@@ -6,17 +6,18 @@ require_once 'DAO.php';
 // Tu clase propia
 class UserDao extends DAO
 {
-    public function get_user($id)
+    public function get_user(int $id)
     {
-        // if void equals 'false', it will return data from query
-        // si void es igual a 'false', devolverá los datos del query
-        $this->executeQuery("SELECT * FROM users WHERE id = '{$id}'", false);
+        // If method is executeGet(), it will return result set from database
+        // Si el método es executeGet(), devolverá los datos de la base de datos
+        $this->executeGet("SELECT * FROM users WHERE id = :id", ['id' => $id]);
     }
     public function save_user($name)
     {
-        // Set void to true and set custom success message to save data
-        // Cambiar void a true y crear un mensaje de éxito para guardar datos
-        $this->executeQuery("INSERT INTO users (name) VALUES ('{$name}')", true, 'User saved successfully!');        
+        // Use execute() method to store data and set_msj() method to create custom message
+        // Usar método execute() para insertar datos y el método set_msj() para crear un mensaje
+        $this->execute("INSERT INTO users (name) VALUES (:name)", ['name' => $name]);
+        $this->message("User saved successfully!");
     }
 }
 
